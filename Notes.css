@@ -1,0 +1,148 @@
+/* =====================
+   Design Tokens
+===================== */
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --primary: #4f46e5;
+  --danger: #ef4444;
+  --border: #e2e8f0;
+
+  --radius: 10px;
+  --shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+body.dark {
+  --bg: #020617;
+  --surface: #0f172a;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --border: #1e293b;
+}
+
+/* =====================
+   Base
+===================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* =====================
+   Sidebar
+===================== */
+.sidebar {
+  width: 300px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar h1 {
+  font-size: 1.25rem;
+}
+
+.sidebar input {
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+/* =====================
+   Notes List
+===================== */
+#notesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.note-item {
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.note-item:hover {
+  background: var(--bg);
+}
+
+.note-item.active {
+  border-color: var(--primary);
+}
+
+.note-item small {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+/* =====================
+   Editor
+===================== */
+.editor {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.editor input,
+.editor textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+  color: var(--text);
+}
+
+.editor textarea {
+  flex: 1;
+  resize: none;
+  line-height: 1.6;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.danger {
+  background: var(--danger);
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
