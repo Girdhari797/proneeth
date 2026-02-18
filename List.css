@@ -1,0 +1,232 @@
+/* =====================
+   Design Tokens
+===================== */
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --primary: #4f46e5;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --border: #e2e8f0;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+body.dark {
+  --bg: #020617;
+  --surface: #0f172a;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --border: #1e293b;
+}
+
+/* =====================
+   Base Reset
+===================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =====================
+   App Container
+===================== */
+.container {
+  width: 800pxs;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+}
+
+/* =====================
+   Header
+===================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+#themeToggle {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+/* =====================
+   Progress Bar
+===================== */
+.progress {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--success)
+  );
+  transition: width 0.3s ease;
+}
+
+/* =====================
+   Input Section
+===================== */
+.todo-input {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 0.5rem;
+}
+
+.todo-input input,
+.todo-input select,
+.todo-input button {
+  height: 40px;
+  padding: 0 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.todo-input input,
+.todo-input select {
+  background: transparent;
+  color: var(--text);
+}
+
+.todo-input input::placeholder {
+  color: var(--muted);
+}
+
+.todo-input button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.todo-input button:hover {
+  background: #4338ca;
+}
+
+/* =====================
+   Task List
+===================== */
+ul {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+}
+
+li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+li:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+li.completed {
+  opacity: 0.6;
+}
+
+/* =====================
+   Task Content
+===================== */
+.task-info span:first-child {
+  font-weight: 500;
+}
+
+.category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+}
+
+.due {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* =====================
+   Actions
+===================== */
+.actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.actions button:hover {
+  color: var(--danger);
+}
+
+/* =====================
+   Dragging State
+===================== */
+.dragging {
+  opacity: 0.4;
+}
+
+/* =====================
+   Responsive
+===================== */
+@media (max-width: 520px) {
+  .todo-input {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .todo-input button {
+    grid-column: span 2;
+  }
+}

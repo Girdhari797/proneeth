@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Typing Master Pro</title>
+<link rel="stylesheet" href="Typing.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>Typing Master Pro</h1>
+  <button id="themeToggle">🌙</button>
+</header>
+
+<section class="login">
+  <input id="username" placeholder="Enter username">
+  <button id="loginBtn">Login</button>
+</section>
+
+<main id="app" class="hidden">
+
+<section class="controls">
+  <select id="difficulty">
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+
+  <select id="timeMode">
+    <option value="30">30s</option>
+    <option value="60">60s</option>
+    <option value="120">120s</option>
+  </select>
+
+  <button id="startBtn">Start</button>
+</section>
+
+<section id="textDisplay"></section>
+
+<textarea id="input" disabled placeholder="Start typing..."></textarea>
+
+<section class="stats">
+  <div>Time: <span id="time">0</span></div>
+  <div>WPM: <span id="wpm">0</span></div>
+  <div>Accuracy: <span id="accuracy">0</span>%</div>
+  <div>CPM: <span id="cpm">0</span></div>
+</section>
+
+<section class="boards">
+  <div>
+    <h3>Progress</h3>
+    <ul id="history"></ul>
+  </div>
+  <div>
+    <h3>Speed Board</h3>
+    <p>Best: <span id="best">0</span></p>
+    <p>Average: <span id="avg">0</span></p>
+    <p>Streak: <span id="streak">0</span> days</p>
+  </div>
+</section>
+
+<canvas id="chart"></canvas>
+
+</main>
+
+<script src="Typing.js"></script>
+</body>
+</html>

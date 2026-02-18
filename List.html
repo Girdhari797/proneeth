@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced To-Do App</title>
+  <link rel="stylesheet" href="List.css" />
+</head>
+<body>
+
+<main class="container">
+  <header>
+    <h1>To-Do List</h1>
+    <button id="themeToggle">🌙</button>
+  </header>
+
+  <!-- Progress Bar -->
+  <div class="progress">
+    <div id="progressBar"></div>
+  </div>
+
+  <!-- Input Area -->
+  <div class="todo-input">
+    <input id="taskInput" type="text" placeholder="Task name" />
+    <input id="dueDateInput" type="date" />
+    <select id="categoryInput">
+      <option value="Work">Work</option>
+      <option value="Personal">Personal</option>
+      <option value="Study">Study</option>
+    </select>
+    <button id="addTaskBtn">Add</button>
+  </div>
+
+  <ul id="taskList"></ul>
+</main>
+
+<script src="List.js"></script>
+</body>
+</html>

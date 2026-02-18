@@ -1,0 +1,94 @@
+:root {
+  --bg: #0f172a;
+  --card: #020617;
+  --primary: #38bdf8;
+  --text: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text);
+}
+
+.game {
+  background: var(--card);
+  padding: 2rem;
+  border-radius: 16px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.5rem;
+}
+
+.status {
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.cell {
+  height: 90px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: #020617;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.cell:hover {
+  background: #020617;
+  transform: scale(1.05);
+}
+
+.cell:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.controls {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: var(--primary);
+  color: #020617;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,105 @@
+:root {
+  --bg:#f4f6f8;
+  --text:#000;
+  --card:#fff;
+  --accent:#007bff;
+}
+
+body.dark {
+  --bg:#121212;
+  --text:#fff;
+  --card:#1e1e1e;
+}
+
+body {
+  margin:0;
+  font-family:Arial;
+  background:var(--bg);
+  color:var(--text);
+}
+
+header {
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+  background:var(--card);
+}
+
+.hidden { display:none; }
+
+.login, .controls, .stats {
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin:15px;
+}
+
+#textDisplay {
+  background:var(--card);
+  padding:20px;
+  margin:15px;
+  border-radius:8px;
+  font-size:18px;
+}
+
+#loginBtn {
+	width:130px;
+	height:50px;
+	font-size:20px;
+	border-radius:20px;
+	background: maroon;
+	color:white;
+	border:none;
+}
+
+#loginBtn:hover {
+	width:130px;
+	height:50px;
+	font-size:20px;
+	border-radius:20px;
+	background: firebrick;
+	color:white;
+	border:none;
+}
+
+#username {
+	width:300px;
+	border-radius:20px;
+	padding:10px 10px;
+}
+
+#startBtn {
+	border-radius:15px;
+	border:none;
+	background-color:#006400;
+	color:white;
+}
+
+#startBtn:hover {
+	border-radius:15px;
+	border:none;
+	background-color:#98FB98;
+	color:black;
+}
+
+.correct { color:green; }
+.incorrect { color:red; }
+.active { text-decoration:underline; }
+
+textarea {
+  width:95%;
+  height:100px;
+  margin:auto;
+  display:block;
+  font-size:16px;
+}
+
+.boards {
+  display:flex;
+  justify-content:space-around;
+}
+
+button {
+  padding:8px 12px;
+  cursor:pointer;
+}

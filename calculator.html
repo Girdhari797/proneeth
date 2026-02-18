@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ultimate Scientific Calculator</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #ece9e6, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+.calculator {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    width: 360px;
+    max-width: 100%;
+}
+.display {
+    background-color: #dfe6e9;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 1.8rem;
+    text-align: right;
+    margin-bottom: 10px;
+    min-height: 50px;
+    word-wrap: break-word;
+}
+.history {
+    max-height: 120px;
+    overflow-y: auto;
+    background: #e0f7fa;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+}
+button {
+    padding: 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: #74b9ff;
+    color: #2d3436;
+}
+button.operator { background-color: #0984e3; color: #fff; }
+button.scientific { background-color: #6c5ce7; color: #fff; }
+button.equal { background-color: #00b894; color: #fff; grid-column: span 2; }
+button.memory { background-color: #fd79a8; color: #fff; }
+button.clear { background-color: #d63031; color: #fff; }
+button.toggle { background-color: #ffeaa7; color: #2d3436; }
+button:hover { transform: scale(1.05); }
+@media (max-width: 400px) {
+    button { padding: 12px; font-size: 0.9rem; }
+    .display { font-size: 1.4rem; }
+}
+</style>
+</head>
+<body>
+<div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="history" id="history"></div>
+    <div class="buttons">
+        <button class="clear" id="clear">C</button>
+        <button class="memory" data-value="MC">MC</button>
+        <button class="memory" data-value="MR">MR</button>
+        <button class="memory" data-value="M+">M+</button>
+        <button class="memory" data-value="M-">M-</button>
+        <button class="operator" data-value="/">÷</button>
+
+        <button data-value="7">7</button>
+        <button data-value="8">8</button>
+        <button data-value="9">9</button>
+        <button class="operator" data-value="*">×</button>
+        <button class="scientific" data-value="sqrt(">√</button>
+        <button class="scientific" data-value="^">^</button>
+
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button class="operator" data-value="-">−</button>
+        <button class="scientific" data-value="sin(">sin</button>
+        <button class="scientific" data-value="cos(">cos</button>
+
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button class="operator" data-value="+">+</button>
+        <button class="scientific" data-value="tan(">tan</button>
+        <button class="scientific" data-value="log(">log</button>
+
+        <button data-value="0" style="grid-column: span 2;">0</button>
+        <button data-value=".">.</button>
+        <button class="equal" id="equals">=</button>
+        <button class="scientific" data-value="exp(">exp</button>
+        <button class="scientific" data-value="pi">π</button>
+
+        <button class="toggle" id="toggleDegrees">Deg</button>
+    </div>
+</div>
+
+<script>
+const display = document.getElementById("display");
+const historyEl = document.getElementById("history");
+const buttons = document.querySelectorAll("button");
+let currentInput = "";
+let memory = 0;
+let isDegrees = true;
+
+function appendInput(value){
+    if(value === "pi") currentInput += Math.PI.toFixed(8);
+    else currentInput += value;
+    updateDisplay();
+}
+function updateDisplay(){
+    display.textContent = currentInput || "0";
+}
+function addHistory(entry){
+    const div = document.createElement("div");
+    div.textContent = entry;
+    historyEl.prepend(div);
+}
+function calculateExpression(expr){
+    try{
+        expr = expr.replace(/\^/g,"**");
+        expr = expr.replace(/sqrt\(/g,"Math.sqrt(")
+                   .replace(/exp\(/g,"Math.exp(")
+                   .replace(/log\(/g,"Math.log10(")
+                   .replace(/sin\(/g, isDegrees ? "Math.sin(" : "Math.sin(")
+                   .replace(/cos\(/g, isDegrees ? "Math.cos(" : "Math.cos(")
+                   .replace(/tan\(/g, isDegrees ? "Math.tan(" : "Math.tan(");
+        if(isDegrees){
+            expr = expr.replace(/Math\.sin\(([^)]+)\)/g,"Math.sin($1*Math.PI/180)")
+                       .replace(/Math\.cos\(([^)]+)\)/g,"Math.cos($1*Math.PI/180)")
+                       .replace(/Math\.tan\(([^)]+)\)/g,"Math.tan($1*Math.PI/180)");
+        }
+        let result = eval(expr);
+        if(isNaN(result) || !isFinite(result)) return "Error";
+        return result.toString();
+    }catch{
+        return "Error";
+    }
+}
+
+buttons.forEach(btn=>{
+    btn.addEventListener("click",()=>{
+        const val = btn.dataset.value;
+        if(btn.id==="clear"){currentInput="";}
+        else if(btn.id==="equals"){
+            let result = calculateExpression(currentInput);
+            addHistory(`${currentInput} = ${result}`);
+            currentInput=result;
+        }
+        else if(btn.id==="toggleDegrees"){
+            isDegrees = !isDegrees;
+            btn.textContent = isDegrees ? "Deg" : "Rad";
+        }
+        else if(btn.classList.contains("memory")){
+            if(val==="MC") memory=0;
+            else if(val==="MR") appendInput(memory.toString());
+            else if(val==="M+") memory += parseFloat(calculateExpression(currentInput)||0);
+            else if(val==="M-") memory -= parseFloat(calculateExpression(currentInput)||0);
+        }
+        else appendInput(val);
+        updateDisplay();
+    });
+});
+
+// Keyboard support
+document.addEventListener("keydown",e=>{
+    const valid="0123456789+-*/.^";
+    if(valid.includes(e.key)) currentInput+=e.key;
+    else if(e.key==="Enter"){let result=calculateExpression(currentInput); addHistory(`${currentInput} = ${result}`); currentInput=result;}
+    else if(e.key==="Backspace") currentInput=currentInput.slice(0,-1);
+    else if(e.key.toLowerCase()==="c") currentInput="";
+    updateDisplay();
+});
+updateDisplay();
+</script>
+</body>
+</html>
