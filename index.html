@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes</title>
+  <link rel="stylesheet" href="Notes.css" />
+</head>
+<body>
+
+<aside class="sidebar">
+  <header>
+    <h1>Notes</h1>
+    <button id="themeToggle">🌙</button>
+  </header>
+
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search notes..."
+  />
+
+  <button id="newNoteBtn" class="primary">+ New Note</button>
+
+  <ul id="notesList"></ul>
+</aside>
+
+<main class="editor">
+  <input
+    id="noteTitle"
+    placeholder="Note title"
+  />
+  <textarea
+    id="noteBody"
+    placeholder="Start writing..."
+  ></textarea>
+
+  <div class="editor-actions">
+    <button id="pinNoteBtn">📌 Pin</button>
+    <button id="deleteNoteBtn" class="danger">Delete</button>
+  </div>
+</main>
+
+<script src="Notes.js"></script>
+</body>
+</html>
